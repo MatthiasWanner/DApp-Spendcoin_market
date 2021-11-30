@@ -1,12 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import OrderForm from '@components/OrderForm/OrderForm';
 
 export default function index() {
-  return (
-    <div>
-      <Link href="/payment">
-        <a>Enregistrer une commande</a>
-      </Link>
-    </div>
-  );
+  return <OrderForm />;
 }
