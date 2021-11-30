@@ -9,7 +9,7 @@ interface IProps {
 
 export default function Layout({ children }: IProps): JSX.Element {
   return (
-    <div>
+    <div className="">
       <Header />
       <Body> {children} </Body>
       <Footer />

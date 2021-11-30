@@ -10,19 +10,26 @@
     "prettier-format": "prettier --write \"pages/**/*.tsx\" \"pages/api/**/*.ts\""
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/forms": "^0.3.4",
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "autoprefixer": "^10.4.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "12.0.4",
     "husky": "^7.0.4",
+    "postcss": "^8.4.4",
     "prettier": "^2.5.0",
+    "tailwindcss": "^2.2.19",
     "typescript": "4.5.2"
   }
 }
