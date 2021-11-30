@@ -1,4 +1,5 @@
 import React from 'react';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 interface ISelectOption {
   value: string;
@@ -12,6 +13,7 @@ interface IProps {
   className?: string;
   labelClassName?: string;
   selectClassName?: string;
+  register: UseFormRegister<FieldValues>;
 }
 
 export function SelectInput({
@@ -20,16 +22,17 @@ export function SelectInput({
   value,
   className = '',
   selectClassName = '',
-  labelClassName = ''
+  labelClassName = '',
+  register
 }: IProps): JSX.Element {
   return (
     <div className={className}>
       <label className={labelClassName}>
         {label}
-        <select id={value} name={value} className={selectClassName}>
-          {options.map(({ label, value }, i) => {
+        <select {...register(value)} className={selectClassName}>
+          {options.map(({ label, value: optionValue }, i) => {
             return (
-              <option key={i} value={value}>
+              <option key={i} value={optionValue}>
                 {label}
               </option>
             );
