@@ -1,20 +1,19 @@
-import Link from 'next/link';
+import ProductList from '@components/ShopComponents/ProductsComponents/ProductList';
+import { useEffect, useState } from 'react';
+import { Product } from '@interfaces/Product';
+import { fetchGiftCardsData } from '@utils/api';
 
 export default function Shop() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const results = fetchGiftCardsData();
+    setProducts(results);
+  }, []);
+
   return (
     <div>
-      <ul>
-        <li>
-          <Link href="/shop/1">
-            <a>card 1</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/shop/2">
-            <a>card 2</a>
-          </Link>
-        </li>
-      </ul>
+      <ProductList products={products} />
     </div>
   );
 }
