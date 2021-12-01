@@ -58,9 +58,7 @@ export default function ProductOverview({ product }: IProps): JSX.Element {
 
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                {+product.price + (+product.VAT * +product.price) / 100}
-                {product.currencySymbol}
-                {' TTC'}
+                A partir de {product.basePrice}€
               </p>
             </div>
 

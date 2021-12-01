@@ -26,7 +26,7 @@ export const gifCards = [
   {
     name: 'Carte cadeau AiBnB',
     href: '#',
-    price: '20',
+    basePrice: '20',
     currencySymbol: '€',
     VAT: '20',
     description:
