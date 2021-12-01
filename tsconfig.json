@@ -18,9 +18,10 @@
     "paths": {
       "@public/*": ["public/*"],
       "@components/*": ["src/components/*"],
-      "@datas/*": ["src/datas/*"]
+      "@datas/*": ["src/datas/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
