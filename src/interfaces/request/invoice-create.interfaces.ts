@@ -1,5 +1,5 @@
 export enum AddressKeys {
-  CONTRYNAME = 'contry-name',
+  CONTRYNAME = 'country-name',
   STREETADDRESS = 'street-address',
   POSTALCODE = 'postal-code',
   LOCALITY = 'locality'
@@ -35,7 +35,7 @@ export interface IInvoiceBody {
     version: string;
   };
   creationDate: string;
-  invoiceItems: {
+  invoiceItems?: {
     currency: string;
     name: string;
     quantity: number;
@@ -48,12 +48,12 @@ export interface IInvoiceBody {
   invoiceNumber: string;
   buyerInfo: IBuyerInfos;
   sellerInfo: ISellerInfos;
-  paymentTerms: {
+  paymentTerms?: {
     dueDate: string;
   };
-  paymentAddress: string;
+  paymentAddress?: string;
   paymentCurrency: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export interface IUsdPaymentMetadata {
