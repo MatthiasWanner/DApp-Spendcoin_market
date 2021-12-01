@@ -4,16 +4,27 @@ import { useForm } from 'react-hook-form';
 import { Button, TextInput, SelectInput } from '@components/FormComponents';
 import OrderFormHeader from './OrderFormHeader';
 import {
-  IBuyerInfos,
   IBuyerKeys,
-  AddressKeys
+  AddressKeys,
+  IAddress
 } from '@interfaces/request/invoice-create.interface'; // TODO: fix index export next error
+
+interface IFormData extends IAddress {
+  lastName: string;
+  firstName: string;
+  email: string;
+}
 
 function OrderForm(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: IBuyerInfos) => {
-    console.log('submit', data);
+  const onSubmit = ({ email, firstName, lastName, ...address }: IFormData) => {
+    console.log('submit', {
+      address,
+      email,
+      firstName,
+      lastName
+    });
   };
 
   return (
@@ -26,7 +37,7 @@ function OrderForm(): JSX.Element {
             <div className="grid grid-cols-6 gap-6">
               <TextInput
                 label="Prénom"
-                value={IBuyerKeys.LASTNAME}
+                value={IBuyerKeys.FIRSTNAME}
                 className="col-span-6 sm:col-span-3"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -54,7 +65,7 @@ function OrderForm(): JSX.Element {
               <SelectInput
                 label="Pays"
                 value={AddressKeys.CONTRYNAME}
-                options={[{ label: 'France', value: 'fr' }]}
+                options={[{ label: 'France', value: 'France' }]}
                 className="col-span-6 sm:col-span-3"
                 labelClassName="block text-sm font-medium text-gray-700"
                 selectClassName="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
