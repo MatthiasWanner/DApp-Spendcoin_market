@@ -12,6 +12,7 @@ import {
 import { useMutation } from 'react-query';
 import { invoices } from '@utils/api';
 import { invoiceBody } from '@utils/constants';
+import { invoiceNumberGenerator } from '@utils/api/request/invoiceNumberGenerator';
 
 interface IFormData extends IAddress {
   lastName: string;
@@ -56,8 +57,10 @@ function OrderForm(): JSX.Element {
       ],
       buyerInfo: { address, email, firstName, lastName },
       creationDate: new Date().toISOString(),
-      invoiceNumber: '123' // TODO: generate invoice number by function
+      invoiceNumber: invoiceNumberGenerator(`${lastName[0]} ${firstName[0]}`)
     };
+
+    console.log(data.invoiceNumber);
 
     const { id } = await mutateInvoice(data);
     await mutateInvoiceOnChain(id);
