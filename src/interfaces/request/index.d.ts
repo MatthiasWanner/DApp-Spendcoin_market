@@ -1,1 +1,2 @@
-export * from './invoice-create.interface';
+export * from './invoice-create.interfaces';
+export * from './invoice-get.interface';

@@ -7,7 +7,7 @@ import {
   IBuyerKeys,
   AddressKeys,
   IAddress
-} from '@interfaces/request/invoice-create.interface'; // TODO: fix index export next error
+} from '@interfaces/request/invoice-create.interfaces'; // TODO: fix index export next error
 
 interface IFormData extends IAddress {
   lastName: string;
