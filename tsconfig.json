@@ -16,7 +16,10 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
+      "@public/*": ["public/*"],
       "@components/*": ["src/components/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@utils/*": ["src/utils/*"],
       "@datas/*": ["src/datas/*"]
     }
   },
