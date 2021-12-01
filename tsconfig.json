@@ -18,11 +18,11 @@
     "paths": {
       "@public/*": ["public/*"],
       "@components/*": ["src/components/*"],
+      "@datas/*": ["src/datas/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@utils/*": ["src/utils/*"],
-      "@datas/*": ["src/datas/*"]
+      "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

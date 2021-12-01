@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 interface IProps {
   type?: 'button' | 'submit' | 'reset';
@@ -8,17 +8,17 @@ interface IProps {
   handleClick?: () => void;
 }
 
-function Button({
+export function Button({
   children,
   className = '',
-  type,
+  type = 'button',
   disabled = false,
-  handleClick,
+  handleClick
 }: IProps): JSX.Element {
   return (
     <button
       disabled={disabled}
-      type={type || 'button'}
+      type={type}
       className={className}
       onClick={handleClick ? () => handleClick() : undefined}
     >
@@ -26,5 +26,3 @@ function Button({
     </button>
   );
 }
-
-export default Button;
