@@ -6,8 +6,12 @@ import OrderFormHeader from './OrderFormHeader';
 import {
   IBuyerKeys,
   AddressKeys,
-  IAddress
+  IAddress,
+  IInvoiceBody
 } from '@interfaces/request/invoice-create.interfaces'; // TODO: fix index export next error
+import { useMutation } from 'react-query';
+import { invoices } from '@utils/api';
+import { invoiceBody } from '@utils/constants';
 
 interface IFormData extends IAddress {
   lastName: string;
@@ -18,13 +22,45 @@ interface IFormData extends IAddress {
 function OrderForm(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = ({ email, firstName, lastName, ...address }: IFormData) => {
-    console.log('submit', {
-      address,
-      email,
-      firstName,
-      lastName
-    });
+  const { mutateAsync: mutateInvoice } = useMutation(invoices.create, {
+    onSuccess: (data) => console.log(data),
+    onError: (error) => console.log(error)
+  });
+
+  const { mutateAsync: mutateInvoiceOnChain } = useMutation(
+    invoices.postOnChain,
+    {
+      onSuccess: (data) => console.log(data),
+      onError: (error) => console.log(error)
+    }
+  );
+
+  const onSubmit = async ({
+    email,
+    firstName,
+    lastName,
+    ...address
+  }: IFormData) => {
+    const data: IInvoiceBody = {
+      ...invoiceBody,
+
+      // Temporary datas
+      invoiceItems: [
+        {
+          name: 'test',
+          quantity: 1,
+          currency: 'EUR',
+          unitPrice: '0010',
+          tax: { type: 'percentage', amount: '20' }
+        }
+      ],
+      buyerInfo: { address, email, firstName, lastName },
+      creationDate: new Date().toISOString(),
+      invoiceNumber: '123' // TODO: generate invoice number by function
+    };
+
+    const { id } = await mutateInvoice(data);
+    await mutateInvoiceOnChain(id);
   };
 
   return (
@@ -64,7 +100,7 @@ function OrderForm(): JSX.Element {
 
               <SelectInput
                 label="Pays"
-                value={AddressKeys.CONTRYNAME}
+                value={AddressKeys.COUNTRYNAME}
                 options={[{ label: 'France', value: 'France' }]}
                 className="col-span-6 sm:col-span-3"
                 labelClassName="block text-sm font-medium text-gray-700"

@@ -29,7 +29,11 @@ export function SelectInput({
     <div className={className}>
       <label className={labelClassName}>
         {label}
-        <select {...register(value)} className={selectClassName}>
+        <select
+          {...register(value)}
+          className={selectClassName}
+          defaultValue={options[0].value}
+        >
           {options.map(({ label, value: optionValue }, i) => {
             return (
               <option key={i} value={optionValue}>
