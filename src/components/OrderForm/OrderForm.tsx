@@ -1,13 +1,18 @@
-import { Button, TextInput, SelectInput } from '@components/FormComponents';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Button, TextInput, SelectInput } from '@components/FormComponents';
 import OrderFormHeader from './OrderFormHeader';
+import {
+  IBuyerInfos,
+  IBuyerKeys,
+  AddressKeys
+} from '@interfaces/request/invoice-create.interface'; // TODO: fix index export next error
 
 function OrderForm(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: IBuyerInfos) => {
     console.log('submit', data);
   };
 
@@ -21,7 +26,7 @@ function OrderForm(): JSX.Element {
             <div className="grid grid-cols-6 gap-6">
               <TextInput
                 label="Prénom"
-                value="firstName"
+                value={IBuyerKeys.LASTNAME}
                 className="col-span-6 sm:col-span-3"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -30,7 +35,7 @@ function OrderForm(): JSX.Element {
 
               <TextInput
                 label="Nom"
-                value="lastName"
+                value={IBuyerKeys.LASTNAME}
                 className="col-span-6 sm:col-span-3"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -39,7 +44,7 @@ function OrderForm(): JSX.Element {
 
               <TextInput
                 label="Adresse mail"
-                value="email"
+                value={IBuyerKeys.EMAIL}
                 className="col-span-6 sm:col-span-4"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -48,7 +53,7 @@ function OrderForm(): JSX.Element {
 
               <SelectInput
                 label="Pays"
-                value="country-name"
+                value={AddressKeys.CONTRYNAME}
                 options={[{ label: 'France', value: 'fr' }]}
                 className="col-span-6 sm:col-span-3"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -58,7 +63,7 @@ function OrderForm(): JSX.Element {
 
               <TextInput
                 label="Adresse postale"
-                value="street-address"
+                value={AddressKeys.STREETADDRESS}
                 className="col-span-6"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -67,7 +72,7 @@ function OrderForm(): JSX.Element {
 
               <TextInput
                 label="Ville"
-                value="locality"
+                value={AddressKeys.LOCALITY}
                 className="col-span-6 sm:col-span-6 lg:col-span-2"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
@@ -76,7 +81,7 @@ function OrderForm(): JSX.Element {
 
               <TextInput
                 label="Code postal"
-                value="postal-code"
+                value={AddressKeys.POSTALCODE}
                 className="col-span-6 sm:col-span-3 lg:col-span-2"
                 inputClassName="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 labelClassName="block text-sm font-medium text-gray-700"
