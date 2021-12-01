@@ -1,5 +1,5 @@
 export enum AddressKeys {
-  CONTRYNAME = 'country-name',
+  COUNTRYNAME = 'country-name',
   STREETADDRESS = 'street-address',
   POSTALCODE = 'postal-code',
   LOCALITY = 'locality'
@@ -80,4 +80,8 @@ export interface IInvoiceCreateResponse extends IInvoiceBody {
   status: string;
   paymentMetadata: IUsdPaymentMetadata | null;
   role: string;
+}
+
+export interface IConvertInvoiceOnChain {
+  requestId: string;
 }
