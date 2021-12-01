@@ -14,7 +14,7 @@ export const gifCards = [
       }
     ],
     breadcrumbs: [
-      { id: 1, name: 'CarteS Cadeau', href: '#' },
+      { id: 1, name: 'Carte Cadeau', href: '#' },
       { id: 2, name: 'Cdiscount', href: '#' }
     ],
     options: [
@@ -24,7 +24,7 @@ export const gifCards = [
     ]
   },
   {
-    name: 'Carte cadeau Cdiscount',
+    name: 'Carte cadeau AiBnB',
     href: '#',
     price: '20',
     currencySymbol: '€',
@@ -38,7 +38,7 @@ export const gifCards = [
       }
     ],
     breadcrumbs: [
-      { id: 1, name: 'CarteS', href: '#' },
+      { id: 1, name: 'Cartes Cadeau', href: '#' },
       { id: 2, name: 'AirBnB', href: '#' }
     ],
     options: [
