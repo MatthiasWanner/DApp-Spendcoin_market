@@ -2,8 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAppFromStore } from '../../redux/slices/app.slice';
+import { Button } from '@components/FormComponents';
 
 function Header(): JSX.Element {
+  const { app, dispatchActiveModal } = useAppFromStore();
   return (
     <>
       <Head>
@@ -31,6 +34,9 @@ function Header(): JSX.Element {
         <Link href="/shop">
           <a>Shop</a>
         </Link>
+        <Button handleClick={() => dispatchActiveModal(!app.activeModal)}>
+          Toto {app.activeModal}
+        </Button>
       </header>
     </>
   );
