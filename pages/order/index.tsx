@@ -1,6 +1,6 @@
 import React from 'react';
-import OrderForm from '@components/OrderForm/OrderForm';
+import OrderRegister from '@components/Order';
 
 export default function index() {
-  return <OrderForm />;
+  return <OrderRegister />;
 }

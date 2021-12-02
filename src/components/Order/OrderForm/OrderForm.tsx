@@ -65,7 +65,7 @@ function OrderForm(): JSX.Element {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="shadow sm:rounded-md sm:overflow-hidden">
+        <div className="shadow sm:overflow-hidden">
           <div className="bg-isabelline py-6 px-4 space-y-6 sm:p-6">
             <OrderFormHeader />
 
