@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAppFromStore } from '../../redux/slices/app.slice';
-import { Button } from '../../../src/components/FormComponents';
+import { Button } from '@components/FormComponents';
 
 function Header(): JSX.Element {
   const { app, dispatchActiveModal } = useAppFromStore();
