@@ -1,16 +1,16 @@
 import { CheckIcon } from '@heroicons/react/solid';
 import ProductImages from './ProductImages';
 import { Button } from '@components/FormComponents';
+import { Product } from '@interfaces/Product';
 
 interface IProps {
-  product: any;
+  product: Product;
 }
 
 export default function ProductOverview({ product }: IProps): JSX.Element {
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
-        {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <nav aria-label="Breadcrumb">
             <ol role="list" className="flex items-center space-x-2">

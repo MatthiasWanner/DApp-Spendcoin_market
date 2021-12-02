@@ -1,9 +1,7 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Product } from '';
 import ProductItemHeader from './ProductItemHeader';
 import ProductItemBody from './ProductItemBody';
+import { Product } from '@interfaces/Product';
+import ProductButton from './ProductOverviewButton';
 
 type ProductProps = {
   id: number;
@@ -15,9 +13,12 @@ export default function ProductItem({
   product
 }: ProductProps): JSX.Element {
   return (
-    <div className="relative group">
-      <ProductItemHeader {...product.images[0]} />
-      <ProductItemBody id={id} {...product} />
-    </div>
+    <>
+      <ProductButton id={id} product={product} />
+      <div className="relative group">
+        <ProductItemHeader {...product.images[0]} />
+        <ProductItemBody id={id} {...product} />
+      </div>
+    </>
   );
 }
