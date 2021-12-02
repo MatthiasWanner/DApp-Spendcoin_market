@@ -2,6 +2,7 @@ import { CheckIcon } from '@heroicons/react/solid';
 import ProductImages from './ProductImages';
 import { Button } from '@components/FormComponents';
 import { Product } from '@interfaces/Product';
+import ProductOverViewForm from './ProductOverViewForm';
 
 interface IProps {
   product: Product;
@@ -79,19 +80,7 @@ export default function ProductOverview({ product }: IProps): JSX.Element {
         </div>
 
         <ProductImages images={product.images} />
-
-        {/* Product form */}
-        <div className="mt-10 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
-          <section aria-labelledby="options-heading">
-            <form>
-              <div className="mt-10">
-                <Button className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">
-                  Acheter
-                </Button>
-              </div>
-            </form>
-          </section>
-        </div>
+        <ProductOverViewForm product={product} />
       </div>
     </div>
   );

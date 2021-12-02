@@ -2,6 +2,7 @@ export interface Product {
   name: string;
   href: string;
   basePrice: string;
+  price?: String;
   currencySymbol: string;
   VAT: string;
   description: string;
