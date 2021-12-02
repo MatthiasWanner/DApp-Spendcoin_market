@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-
-interface ProductImage {
-  src: string;
-  alt: string;
-}
+import { ProductImage } from '@interfaces/Product';
 
 interface IProps {
   images: ProductImage[];
