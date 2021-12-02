@@ -5,12 +5,12 @@ import { RootState } from '../index';
 
 export interface AppState {
   activeModal: boolean;
-  productOverview: Product;
+  viewedProduct: Product;
 }
 
 const initialState: AppState = {
   activeModal: false,
-  productOverview: {
+  viewedProduct: {
     name: '',
     href: '',
     basePrice: '',
@@ -30,22 +30,22 @@ export const appSlice = createSlice({
     setActiveModal: (state, action: PayloadAction<boolean>) => {
       return { ...state, activeModal: action.payload };
     },
-    setproductOverview: (state, action: PayloadAction<Product>) => {
-      return { ...state, productOverview: { ...action.payload } };
+    setViewedProduct: (state, action: PayloadAction<Product>) => {
+      return { ...state, viewedProduct: { ...action.payload } };
     }
   }
 });
 
-export const { setActiveModal, setproductOverview } = appSlice.actions;
+export const { setActiveModal, setViewedProduct } = appSlice.actions;
 
 export const useAppFromStore = () => {
   const app = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   const dispatchActiveModal = (payload: boolean) =>
     dispatch(setActiveModal(payload));
-  const dispatchproductOverview = (payload: Product) =>
-    dispatch(setproductOverview(payload));
-  return { app, dispatchActiveModal, dispatchproductOverview };
+  const dispatchViewedProduct = (payload: Product) =>
+    dispatch(setViewedProduct(payload));
+  return { app, dispatchActiveModal, dispatchViewedProduct };
 };
 
 export default appSlice.reducer;
