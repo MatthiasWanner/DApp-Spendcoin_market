@@ -11,7 +11,7 @@ interface IProps {
 
 function InvoiceDetails({ total = '' }: IProps): JSX.Element {
   return (
-    <div className="sticky bottom-0 flex-none bg-isabelline p-6">
+    <div className="sticky bottom-0 flex-none bg-isabelline border-l border-gray-200 p-6">
       <Total total={total} />
     </div>
   );
