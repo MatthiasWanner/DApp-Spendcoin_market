@@ -12,14 +12,21 @@ function ProductOverViewForm({
   product
 }: ProductOverViewFormProps): JSX.Element {
   const [price, setPrice] = useState<string>('');
-  const { dispatchActiveModal } = useAppFromStore();
+  const { dispatchActiveModal, dispatchResetViewedProduct } = useAppFromStore();
   const { dispatchAddProduct } = useCartFromStore();
 
-  const handleBuyProduct = () => {
+  const handleBuyProduct = ({ name, VAT: amount }: Product, price: string) => {
     dispatchAddProduct({
-      ...product,
-      price
+      currency: 'EUR',
+      name,
+      quantity: 1,
+      unitPrice: (+price.replace(',', '.') * 100).toString(),
+      tax: {
+        type: 'percentage',
+        amount
+      }
     });
+    dispatchResetViewedProduct();
     dispatchActiveModal(false);
   };
 
@@ -51,7 +58,7 @@ function ProductOverViewForm({
           <div className="mt-10">
             <Button
               className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-              handleClick={handleBuyProduct}
+              handleClick={() => handleBuyProduct(product, price)}
             >
               Acheter
             </Button>

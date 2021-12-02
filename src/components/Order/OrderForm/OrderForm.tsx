@@ -14,6 +14,8 @@ import { invoices } from '@utils/api';
 import { invoiceBody } from '@utils/constants';
 import { invoiceNumberGenerator } from '@utils/api/request/invoiceNumberGenerator';
 import { toast } from 'react-toastify';
+import { useAppFromStore } from 'src/redux/slices/app.slice';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
 interface IFormData extends IAddress {
   lastName: string;
@@ -24,11 +26,15 @@ interface IFormData extends IAddress {
 function OrderForm(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const { mutateAsync: mutateInvoice } = useMutation(invoices.create);
+  const { dispatchInvoiceId } = useAppFromStore();
+  const { products: invoiceItems } = useCartFromStore().cart;
 
-  const { mutateAsync: mutateInvoiceOnChain } = useMutation(
-    invoices.postOnChain
-  );
+  const { mutateAsync: mutateInvoice } = useMutation(invoices.create, {
+    onSuccess: (data) => {
+      dispatchInvoiceId(data.id);
+      toast.success('Votre commande a été enregistrée 🚀');
+    }
+  });
 
   const onSubmit = async ({
     email,
@@ -39,24 +45,14 @@ function OrderForm(): JSX.Element {
     const data: IInvoiceBody = {
       ...invoiceBody,
 
-      // Temporary datas
-      invoiceItems: [
-        {
-          name: 'test',
-          quantity: 1,
-          currency: 'EUR',
-          unitPrice: '0010',
-          tax: { type: 'percentage', amount: '20' }
-        }
-      ],
+      // fropm redux store
+      invoiceItems,
       buyerInfo: { address, email, firstName, lastName },
       creationDate: new Date().toISOString(),
       invoiceNumber: invoiceNumberGenerator(`${lastName[0]} ${firstName[0]}`)
     };
     try {
-      const { id } = await mutateInvoice(data);
-      /* await mutateInvoiceOnChain(id); */ // 👈 uncomment to post invoice on chain
-      toast.success('Votre commande est bien enregistrée 🚀');
+      await mutateInvoice(data);
     } catch (error) {
       toast.error('Une erreur est survenue ⁉️. Veuillez recommencer');
     }
