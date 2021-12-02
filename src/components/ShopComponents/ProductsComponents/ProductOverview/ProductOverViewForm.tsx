@@ -13,7 +13,7 @@ function ProductOverViewForm({
 }: ProductOverViewFormProps): JSX.Element {
   const [price, setPrice] = useState<string>('');
   const { dispatchActiveModal, dispatchResetViewedProduct } = useAppFromStore();
-  const { dispatchAddProduct } = useCartFromStore();
+  const { dispatchAddItem } = useCartFromStore();
 
   useEffect(() => {
     return () => {
@@ -22,7 +22,7 @@ function ProductOverViewForm({
   }, []);
 
   const handleBuyProduct = ({ name, VAT: amount }: Product, price: string) => {
-    dispatchAddProduct({
+    dispatchAddItem({
       currency: 'EUR',
       name,
       quantity: 1,

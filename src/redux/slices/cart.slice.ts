@@ -1,12 +1,11 @@
-import { Product } from '@interfaces/Product';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '..';
 
-import { InvoiceItem } from '@interfaces/request';
+import { InvoiceItem as CartItem } from '@interfaces/request';
 
 export interface CartState {
-  products: InvoiceItem[];
+  products: CartItem[];
 }
 
 const initialState: CartState = {
@@ -17,20 +16,19 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<InvoiceItem>) => {
+    addItem: (state, action: PayloadAction<CartItem>) => {
       return { ...state, products: [...state.products, { ...action.payload }] };
     }
   }
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addItem } = cartSlice.actions;
 
 export const useCartFromStore = () => {
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const dispatchAddProduct = (payload: InvoiceItem) =>
-    dispatch(addProduct(payload));
-  return { cart, dispatchAddProduct };
+  const dispatchAddItem = (payload: CartItem) => dispatch(addItem(payload));
+  return { cart, dispatchAddItem };
 };
 
 export default cartSlice.reducer;
