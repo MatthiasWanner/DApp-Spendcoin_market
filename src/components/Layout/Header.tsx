@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAppFromStore } from '../../redux/slices/app.slice';
+import { Button } from '@components/FormComponents';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -10,7 +12,7 @@ const navigation = [
   { name: 'Payment', href: '/payment' } // 👈 only dev link
 ];
 
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
     <>
       <Head>
