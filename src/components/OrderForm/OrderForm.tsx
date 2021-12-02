@@ -13,6 +13,7 @@ import { useMutation } from 'react-query';
 import { invoices } from '@utils/api';
 import { invoiceBody } from '@utils/constants';
 import { invoiceNumberGenerator } from '@utils/api/request/invoiceNumberGenerator';
+import { toast } from 'react-toastify';
 
 interface IFormData extends IAddress {
   lastName: string;
@@ -23,17 +24,10 @@ interface IFormData extends IAddress {
 function OrderForm(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const { mutateAsync: mutateInvoice } = useMutation(invoices.create, {
-    onSuccess: (data) => console.log(data),
-    onError: (error) => console.log(error)
-  });
+  const { mutateAsync: mutateInvoice } = useMutation(invoices.create);
 
   const { mutateAsync: mutateInvoiceOnChain } = useMutation(
-    invoices.postOnChain,
-    {
-      onSuccess: (data) => console.log(data),
-      onError: (error) => console.log(error)
-    }
+    invoices.postOnChain
   );
 
   const onSubmit = async ({
@@ -59,9 +53,13 @@ function OrderForm(): JSX.Element {
       creationDate: new Date().toISOString(),
       invoiceNumber: invoiceNumberGenerator(`${lastName[0]} ${firstName[0]}`)
     };
-
-    const { id } = await mutateInvoice(data);
-    await mutateInvoiceOnChain(id);
+    try {
+      const { id } = await mutateInvoice(data);
+      /* await mutateInvoiceOnChain(id); */ // 👈 uncomment to post invoice on chain
+      toast.success('Votre commande est bien enregistrée 🚀');
+    } catch (error) {
+      toast.error('Une erreur est survenue ⁉️. Veuillez recommencer');
+    }
   };
 
   return (
