@@ -29,22 +29,24 @@ export interface ISellerInfos extends IBuyerInfos {
   taxRegistration: string;
 }
 
+export interface InvoiceItem {
+  currency: string;
+  name: string;
+  quantity: number;
+  tax: {
+    type: string;
+    amount: string;
+  };
+  unitPrice: string;
+}
+
 export interface IInvoiceBody {
   meta: {
     format: string;
     version: string;
   };
   creationDate: string;
-  invoiceItems?: {
-    currency: string;
-    name: string;
-    quantity: number;
-    tax: {
-      type: string;
-      amount: string;
-    };
-    unitPrice: string;
-  }[];
+  invoiceItems: InvoiceItem[];
   invoiceNumber: string;
   buyerInfo: IBuyerInfos;
   sellerInfo: ISellerInfos;

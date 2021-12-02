@@ -4,7 +4,7 @@ export const gifCards = [
     href: '#',
     basePrice: '20',
     currencySymbol: '€',
-    VAT: '20',
+    VAT: '0',
     description:
       'Offrez une carte cadeau, ils pourront se faire plaisir sur Cdiscount ! Disponible en 20, 50 et 100€.',
     images: [
@@ -28,7 +28,7 @@ export const gifCards = [
     href: '#',
     basePrice: '20',
     currencySymbol: '€',
-    VAT: '20',
+    VAT: '0',
     description:
       'Offrez une carte cadeau, ils pourront se faire plaisir sur AirBnB ! Disponible en 20, 50 et 100€.',
     images: [

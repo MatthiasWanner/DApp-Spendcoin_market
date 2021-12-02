@@ -1,6 +1,6 @@
 import { Button } from '@components/FormComponents';
 import { Product } from '@interfaces/Product';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppFromStore } from 'src/redux/slices/app.slice';
 import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
@@ -12,13 +12,25 @@ function ProductOverViewForm({
   product
 }: ProductOverViewFormProps): JSX.Element {
   const [price, setPrice] = useState<string>('');
-  const { dispatchActiveModal } = useAppFromStore();
-  const { dispatchAddProduct } = useCartFromStore();
+  const { dispatchActiveModal, dispatchResetViewedProduct } = useAppFromStore();
+  const { dispatchAddItem } = useCartFromStore();
 
-  const handleBuyProduct = () => {
-    dispatchAddProduct({
-      ...product,
-      price
+  useEffect(() => {
+    return () => {
+      dispatchResetViewedProduct();
+    };
+  }, []);
+
+  const handleBuyProduct = ({ name, VAT: amount }: Product, price: string) => {
+    dispatchAddItem({
+      currency: 'EUR',
+      name,
+      quantity: 1,
+      unitPrice: (+price.replace(',', '.') * 100).toString(),
+      tax: {
+        type: 'percentage',
+        amount
+      }
     });
     dispatchActiveModal(false);
   };
@@ -51,7 +63,7 @@ function ProductOverViewForm({
           <div className="mt-10">
             <Button
               className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-              handleClick={handleBuyProduct}
+              handleClick={() => handleBuyProduct(product, price)}
             >
               Acheter
             </Button>
