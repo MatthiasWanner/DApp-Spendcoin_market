@@ -4,7 +4,7 @@ import { Product } from '@interfaces/Product';
 import { fetchGiftCardsData } from '@utils/api';
 import { useAppFromStore } from 'src/redux/slices/app.slice';
 import { Overlay } from '@components/Modal';
-import { ProductOverview } from '@components/ShopComponents';
+import ProductOverview from '@components/ShopComponents/ProductsComponents/ProductOverview';
 
 export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
