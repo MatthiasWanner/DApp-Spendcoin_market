@@ -6,6 +6,8 @@ import { RootState } from '../index';
 export interface AppState {
   activeModal: boolean;
   viewedProduct: Product;
+  invoiceId: string | null;
+  requestId: string | null;
 }
 
 const initialState: AppState = {
@@ -20,7 +22,9 @@ const initialState: AppState = {
     images: [],
     breadcrumbs: [],
     options: []
-  }
+  },
+  invoiceId: null,
+  requestId: null
 };
 
 export const appSlice = createSlice({
@@ -31,12 +35,27 @@ export const appSlice = createSlice({
       return { ...state, activeModal: action.payload };
     },
     setViewedProduct: (state, action: PayloadAction<Product>) => {
-      return { ...state, viewedProduct: { ...action.payload } };
+      return { ...state, viewedProduct: action.payload };
+    },
+    resetViewedProduct: (state) => {
+      return { ...state, viewedProduct: initialState.viewedProduct };
+    },
+    setInvoiceId: (state, action: PayloadAction<string | null>) => {
+      return { ...state, invoiceId: action.payload };
+    },
+    setRequestId: (state, action: PayloadAction<string | null>) => {
+      return { ...state, requestId: action.payload };
     }
   }
 });
 
-export const { setActiveModal, setViewedProduct } = appSlice.actions;
+export const {
+  setActiveModal,
+  setViewedProduct,
+  resetViewedProduct,
+  setInvoiceId,
+  setRequestId
+} = appSlice.actions;
 
 export const useAppFromStore = () => {
   const app = useSelector((state: RootState) => state.app);
@@ -45,7 +64,19 @@ export const useAppFromStore = () => {
     dispatch(setActiveModal(payload));
   const dispatchViewedProduct = (payload: Product) =>
     dispatch(setViewedProduct(payload));
-  return { app, dispatchActiveModal, dispatchViewedProduct };
+  const dispatchResetViewedProduct = () => dispatch(resetViewedProduct());
+  const dispatchInvoiceId = (payload: string | null) =>
+    dispatch(setInvoiceId(payload));
+  const dispatchRequestId = (payload: string | null) =>
+    dispatch(setRequestId(payload));
+  return {
+    app,
+    dispatchActiveModal,
+    dispatchViewedProduct,
+    dispatchResetViewedProduct,
+    dispatchInvoiceId,
+    dispatchRequestId
+  };
 };
 
 export default appSlice.reducer;
