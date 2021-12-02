@@ -1,6 +1,7 @@
 import { configureStore /* , getDefaultMiddleware */ } from '@reduxjs/toolkit';
 
 import appReducer from './slices/app.slice';
+import cartReducer from './slices/cart.slice';
 /* import appReducer from './app.slice'; */
 
 /* const customizedMiddleware = getDefaultMiddleware({
@@ -9,7 +10,8 @@ import appReducer from './slices/app.slice';
 
 export const store = configureStore({
   reducer: {
-    app: appReducer
+    app: appReducer,
+    cart: cartReducer
   },
   devTools: true
   /*   middleware: customizedMiddleware */
