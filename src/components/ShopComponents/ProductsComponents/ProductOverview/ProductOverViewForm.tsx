@@ -1,6 +1,6 @@
 import { Button } from '@components/FormComponents';
 import { Product } from '@interfaces/Product';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppFromStore } from 'src/redux/slices/app.slice';
 import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
@@ -15,6 +15,12 @@ function ProductOverViewForm({
   const { dispatchActiveModal, dispatchResetViewedProduct } = useAppFromStore();
   const { dispatchAddProduct } = useCartFromStore();
 
+  useEffect(() => {
+    return () => {
+      dispatchResetViewedProduct();
+    };
+  }, []);
+
   const handleBuyProduct = ({ name, VAT: amount }: Product, price: string) => {
     dispatchAddProduct({
       currency: 'EUR',
@@ -26,7 +32,6 @@ function ProductOverViewForm({
         amount
       }
     });
-    dispatchResetViewedProduct();
     dispatchActiveModal(false);
   };
 
