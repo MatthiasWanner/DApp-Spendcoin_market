@@ -7,6 +7,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      },
+      colors: {
+        'blue-sapphire': '#21587d',
+        isabelline: '#f8f5f1',
+        'space-cadet': '#1d1a44',
+        'indigo-dye': '#1a4461'
       }
     }
   },
