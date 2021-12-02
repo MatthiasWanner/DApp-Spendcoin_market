@@ -9,10 +9,14 @@ interface IProps {
 
 export default function Layout({ children }: IProps): JSX.Element {
   return (
-    <div className="">
-      <Header />
-      <Body> {children} </Body>
-      <Footer />
+    <div className="w-screen bg-space-cadet">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="h-screen">
+          <Header />
+          <Body> {children} </Body>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }
