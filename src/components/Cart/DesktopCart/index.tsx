@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
 import InvoiceDetails from './InvoiceDetails';
 import OrderDetails from './OrderDetails';
@@ -6,6 +7,7 @@ import OrderDetails from './OrderDetails';
 const total = '20€'; // 👈 Will come from redux store
 
 function DesktopCart(): JSX.Element {
+  const { cart } = useCartFromStore();
   return (
     <>
       {/* Order summary */}
@@ -18,7 +20,7 @@ function DesktopCart(): JSX.Element {
         </h2>
 
         <OrderDetails />
-        <InvoiceDetails total={total} />
+        <InvoiceDetails total={cart.total.toString()} />
       </section>
     </>
   );

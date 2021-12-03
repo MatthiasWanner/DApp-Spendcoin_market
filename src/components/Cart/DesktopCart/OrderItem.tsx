@@ -1,12 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
-import { Product } from '@interfaces/Product';
+import { TrashIcon } from '@heroicons/react/outline';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { CartItem } from '@interfaces/CartItem';
 
 interface IProps {
-  product: Product;
+  product: CartItem;
 }
 
-function OrderDetails({ product }: IProps): JSX.Element {
+function OrderItem({ product }: IProps): JSX.Element {
+  const { dispatchRemoveItem } = useCartFromStore();
   return (
     <>
       <Image
@@ -19,12 +22,21 @@ function OrderDetails({ product }: IProps): JSX.Element {
       <div className="flex flex-col justify-between space-y-4">
         <div className="text-sm font-medium space-y-1">
           <h3 className="text-gray-900">{product.name}</h3>
-          <p className="text-gray-900">{product.basePrice}€</p>
+          <p className="text-gray-900">
+            {product.unitPrice}
+            {product.currency}
+          </p>
           <p className="text-gray-900">Quantité: 1</p>
         </div>
+      </div>
+      <div>
+        <TrashIcon
+          className="w-5"
+          onClick={() => dispatchRemoveItem(product)}
+        />
       </div>
     </>
   );
 }
 
-export default OrderDetails;
+export default OrderItem;

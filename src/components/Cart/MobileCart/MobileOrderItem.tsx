@@ -1,13 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
-
-import { Product } from '@interfaces/Product';
+import { CartItem } from '@interfaces/CartItem';
+import { TrashIcon } from '@heroicons/react/solid';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
 interface IProps {
-  product: Product;
+  product: CartItem;
 }
 
 function MobileOrderItem({ product }: IProps): JSX.Element {
+  const { dispatchRemoveItem } = useCartFromStore();
   return (
     <>
       <Image
@@ -23,6 +25,12 @@ function MobileOrderItem({ product }: IProps): JSX.Element {
           <p className="text-gray-900">{product.basePrice}€</p>
           <p className="text-gray-900">Quantité: 1</p>
         </div>
+      </div>
+      <div>
+        <TrashIcon
+          className="w-5"
+          onClick={() => dispatchRemoveItem(product)}
+        />
       </div>
     </>
   );
