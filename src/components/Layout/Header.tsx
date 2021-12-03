@@ -16,12 +16,10 @@ export default function Header(): JSX.Element {
   return (
     <>
       <Head>
-        <div>
-          <title>SpendCoin Market</title>
-          <meta name="description" content="Buy gift cards with cryptos" />
-          <link rel="icon" href="/img/favicon.ico" />
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        </div>
+        <title>SpendCoin Market</title>
+        <meta name="description" content="Buy gift cards with cryptos" />
+        <link rel="icon" href="/img/favicon.ico" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <header>
         <nav aria-label="Top">
