@@ -1,19 +1,18 @@
 import {
   approveErc20ForProxyConversionIfNeeded,
   isSolvent,
-  payRequest,
+  payRequest
 } from '@requestnetwork/payment-processor';
 import { RequestLogicTypes, ExtensionTypes } from '@requestnetwork/types';
-
 import { BigNumber, providers, utils as ethersUtils } from 'ethers';
 
-import { IInvoiceGetResponse } from 'src/interfaces/request';
+import { IInvoiceGetOneResponseWithRequest } from '@interfaces/request';
 import { getPaymentCurrencyContract, getPaymentNetwork } from '.';
 
 export const requestPayment = async (
   metamaskAccount: string | null,
-  requestData: IInvoiceGetResponse,
-  ethereum: any
+  requestData: IInvoiceGetOneResponseWithRequest,
+  ethereum: providers.ExternalProvider
 ): Promise<void> => {
   try {
     if (!metamaskAccount || !requestData) {
@@ -23,7 +22,7 @@ export const requestPayment = async (
     const provider = new providers.Web3Provider(ethereum);
 
     const {
-      request: { request },
+      request: { request }
     } = requestData;
 
     const paymentCurrency = getPaymentCurrencyContract(request);
@@ -39,7 +38,7 @@ export const requestPayment = async (
     const currencyInfos: RequestLogicTypes.ICurrency = {
       type: 'ERC20' as RequestLogicTypes.CURRENCY,
       value: paymentCurrency,
-      network,
+      network
     };
 
     if (
@@ -75,6 +74,8 @@ export const requestPayment = async (
       3
     );
 
+    console.log('maxToSpend', maxToSpend);
+
     approveErc20ForProxyConversionIfNeeded(
       request,
       metamaskAccount,
@@ -85,7 +86,7 @@ export const requestPayment = async (
 
     const tx = await payRequest(request, provider, undefined, undefined, {
       currency: currencyInfos,
-      maxToSpend,
+      maxToSpend
     });
     await tx.wait(1);
   } catch (error) {
