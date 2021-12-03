@@ -3,13 +3,21 @@ import {
   IInvoiceGetOneResponse,
   IInvoiceGetAllResponse,
   IInvoiceBody,
-  IConvertInvoiceOnChain
+  IConvertInvoiceOnChain,
+  IInvoiceUpdateResponse,
+  IInvoiceUpdateArgs
 } from '@interfaces/request';
 import { requestApi } from '@utils/api/request';
 
 export const invoices = {
   create: async (body: IInvoiceBody): Promise<IInvoiceCreateResponse> =>
     (await requestApi.post('/invoices', body)).data,
+
+  updateInvoice: async ({
+    invoiceId,
+    body
+  }: IInvoiceUpdateArgs): Promise<IInvoiceUpdateResponse> =>
+    (await requestApi.put(`/invoices/${invoiceId}`, body)).data,
 
   postOnChain: async (invoiceId: string): Promise<IConvertInvoiceOnChain> =>
     (await requestApi.post(`/invoices/${invoiceId}`)).data,
