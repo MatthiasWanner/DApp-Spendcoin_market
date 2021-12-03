@@ -4,11 +4,14 @@ import { Disclosure } from '@headlessui/react';
 import { fetchGiftCardsData } from '@utils/api';
 import MobileTotal from './MobileInvoiceDetails/MobileTotal';
 import MobileOrderItem from './MobileOrderItem';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { CartItem } from '@interfaces/CartItem';
 
-const products = [fetchGiftCardsData()[0]]; // 👈 will come from Redux store
 const total = '20€'; // 👈 will come from Redux store
 
 function MobileCart() {
+  const { cart } = useCartFromStore();
+  const products = cart.products as CartItem[];
   return (
     <>
       <section
@@ -43,7 +46,7 @@ function MobileCart() {
                   ))}
                 </ul>
               </Disclosure.Panel>
-              <MobileTotal total={total} />
+              <MobileTotal total={cart.total.toString()} />
             </>
           )}
         </Disclosure>
