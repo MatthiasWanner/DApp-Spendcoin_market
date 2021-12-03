@@ -1,14 +1,21 @@
-import { Button } from '@components/FormComponents';
-import Metamask from '@components/Metamask';
 import { useMetaMask } from 'metamask-react';
+import Metamask from '@components/Metamask';
+
+import { useAppFromStore } from 'src/redux/slices/app.slice';
+import PaymentButtons from '@components/Order/PaymentButtons';
+import { Button } from '@components/FormComponents';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
+  const { requestId } = useAppFromStore().app;
 
   // TODO: type ethereum provider
   const handleClick = (connectedAccount: string, ethereumProvider: any) => {
     console.log(connectedAccount, ethereumProvider);
   };
+
+  if (!requestId) return <PaymentButtons />;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col max-w-3xl mx-auto bg-isabelline h-72 shadow-white-light">
