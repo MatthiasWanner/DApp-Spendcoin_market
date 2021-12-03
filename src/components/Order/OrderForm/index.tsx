@@ -149,7 +149,7 @@ function OrderForm(): JSX.Element {
                 type="submit"
                 className="bg-blue-sapphire border border-transparent rounded-md shadow-sm px-4 py-2 m-5 inline-flex justify-center text-base font-medium text-white hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                {'Enregister ma commande'}
+                {'Enregister mes informations'}
               </Button>
             ) : (
               <GoToShopButton>Panier vide : revenir au shop</GoToShopButton>

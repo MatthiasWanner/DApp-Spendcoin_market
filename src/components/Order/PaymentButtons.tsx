@@ -12,20 +12,19 @@ import GoToShopButton from '@components/Shop/GoToShopButton';
 function PaymentButtons(): JSX.Element {
   const router = useRouter();
 
-  const { invoiceId } = useAppFromStore().app;
+  const { app, dispatchRequestId } = useAppFromStore();
   const { total } = useCartFromStore().cart;
 
   const { mutateAsync } = useMutation(invoices.postOnChain, {
-    onSuccess: () => {
+    onSuccess: ({ requestId }) => {
+      dispatchRequestId(requestId);
       router.push('/payment');
     }
   });
 
   const postInvoiceOnChain = async (invoiceId: string) => {
     try {
-      // await mutateAsync(invoiceId);
-      console.log(invoiceId);
-      router.push('/payment'); // 👈 temporary to dev tests before send request to blockchain
+      await mutateAsync(invoiceId);
     } catch (error) {
       toast.error('Une erreur est survenue');
     }
@@ -40,7 +39,7 @@ function PaymentButtons(): JSX.Element {
         {total ? (
           <Button
             className="w-full mt-6 bg-blue-sapphire border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900"
-            handleClick={() => postInvoiceOnChain(invoiceId as string)}
+            handleClick={() => postInvoiceOnChain(app.invoiceId as string)}
           >
             Enregister ma commande de {total} €
           </Button>
