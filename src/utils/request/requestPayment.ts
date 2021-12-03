@@ -7,7 +7,11 @@ import { RequestLogicTypes, ExtensionTypes } from '@requestnetwork/types';
 import { BigNumber, providers, utils as ethersUtils } from 'ethers';
 
 import { IInvoiceGetOneResponseWithRequest } from '@interfaces/request';
-import { getPaymentCurrencyContract, getPaymentNetwork } from '.';
+import {
+  convertIntoChainValue,
+  getPaymentCurrencyContract,
+  getPaymentNetwork
+} from '.';
 
 export const requestPayment = async (
   metamaskAccount: string | null,
@@ -57,14 +61,15 @@ export const requestPayment = async (
       feeAmount: number,
       conversionRate: number,
       slippage: number
-    ): BigNumber => {
-      const paymentAmount = (requestAmount + feeAmount) * conversionRate;
-      // const maxAmount = paymentAmount + (slippage * paymentAmount) / 100;
+    ) => {
+      const usdcAmount = (requestAmount + feeAmount) * conversionRate;
 
-      const maxUsdcAmount =
-        (paymentAmount + (slippage * paymentAmount) / 100) / 100;
+      const maxUsdcAmount = (usdcAmount + (slippage * usdcAmount) / 100) / 100;
 
-      return ethersUtils.parseUnits(maxUsdcAmount.toString(), 6);
+      return ethersUtils.parseUnits(
+        convertIntoChainValue(maxUsdcAmount.toString(), '6'),
+        6
+      );
     };
 
     const maxToSpend = calculateMaxToSpend(
@@ -74,9 +79,7 @@ export const requestPayment = async (
       3
     );
 
-    console.log('maxToSpend', maxToSpend);
-
-    approveErc20ForProxyConversionIfNeeded(
+    await approveErc20ForProxyConversionIfNeeded(
       request,
       metamaskAccount,
       currencyInfos.value,

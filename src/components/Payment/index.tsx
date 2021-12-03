@@ -18,11 +18,6 @@ export default function Payment() {
     { enabled: !!requestId }
   );
 
-  // TODO: type ethereum provider
-  const handleClick = (connectedAccount: string, ethereumProvider: any) => {
-    console.log(connectedAccount, ethereumProvider);
-  };
-
   if (!requestId) return <PaymentButtons />;
 
   return (
