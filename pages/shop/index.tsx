@@ -1,10 +1,10 @@
-import ProductList from '@components/ShopComponents/ProductsComponents/ProductList';
+import ProductList from '@components/Shop/Products/ProductList';
 import { useEffect, useState } from 'react';
 import { Product } from '@interfaces/Product';
 import { fetchGiftCardsData } from '@utils/api';
 import { useAppFromStore } from 'src/redux/slices/app.slice';
-import { Overlay } from '@components/Modal';
-import ProductOverview from '@components/ShopComponents/ProductsComponents/ProductOverview';
+import { Overlay } from '@components/ModalComponents';
+import ProductOverview from '@components/Shop/Products/ProductOverview';
 
 export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
