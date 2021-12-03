@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import { useAppFromStore } from 'src/redux/slices/app.slice';
 import { useCartFromStore } from 'src/redux/slices/cart.slice';
 import GoToShopButton from '@components/Shop/GoToShopButton';
+import { InvoiceItem } from '@interfaces/request';
 
 interface IFormData extends IAddress {
   lastName: string;
@@ -43,10 +44,15 @@ function OrderForm(): JSX.Element {
     lastName,
     ...address
   }: IFormData) => {
-    const invoiceItems = products.map((product) => ({
-      ...product,
-      unitPrice: (+product.unitPrice * 100).toString()
-    }));
+    const invoiceItems: InvoiceItem[] = products.map(
+      ({ name, tax, unitPrice, quantity, currency }) => ({
+        name,
+        currency,
+        quantity,
+        tax,
+        unitPrice: (+unitPrice * 100).toString()
+      })
+    );
 
     const data: IInvoiceBody = {
       ...invoiceBody,
