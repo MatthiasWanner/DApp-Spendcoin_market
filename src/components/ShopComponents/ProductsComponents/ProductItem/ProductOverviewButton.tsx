@@ -10,17 +10,21 @@ type ProductButtonProps = {
 export default function ProductButton({ id, product }: ProductButtonProps) {
   const { dispatchActiveModal, dispatchViewedProduct } = useAppFromStore();
   return (
-    <Link href={{ pathname: '', query: { productItem: id } }} passHref>
-      <button
-        onClick={() => {
-          dispatchViewedProduct(product);
-          dispatchActiveModal(true);
-        }}
-        type="button"
-        className="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        View Gift Card
-      </button>
-    </Link>
+    <>
+      <Link href={{ pathname: '', query: { productItem: id } }} passHref>
+        <button
+          onClick={() => {
+            dispatchViewedProduct(product);
+            dispatchActiveModal(true);
+          }}
+          type="button"
+          className="flex items-center opacity-0 p-4 hover:opacity-100 absolute z-20 top-0 left-0 w-full h-full"
+        >
+          <div className="w-full bg-white bg-opacity-75 backdrop-filter backdrop-blur py-2 px-4 rounded-md text-sm font-medium text-gray-900 text-center">
+            View Gift Card
+          </div>
+        </button>
+      </Link>
+    </>
   );
 }
