@@ -13,12 +13,10 @@ export default function ProductItem({
   product
 }: ProductProps): JSX.Element {
   return (
-    <>
+    <div className="relative group">
       <ProductButton id={id} product={product} />
-      <div className="relative group">
-        <ProductItemHeader {...product.images[0]} />
-        <ProductItemBody id={id} {...product} />
-      </div>
-    </>
+      <ProductItemHeader {...product.images[0]} />
+      <ProductItemBody id={id} {...product} />
+    </div>
   );
 }

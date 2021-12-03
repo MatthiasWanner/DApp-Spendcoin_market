@@ -1,12 +1,13 @@
+import { CartItem } from '@interfaces/CartItem';
 import React from 'react';
+import { useCartFromStore } from 'src/redux/slices/cart.slice';
 
 import OrderItem from './OrderItem';
 
-import { fetchGiftCardsData } from '@utils/api';
-
-const products = [fetchGiftCardsData()[0]]; // 👈 will come from Redux store
-
 function OrderDetails() {
+  const { cart } = useCartFromStore();
+  const products = cart.products as CartItem[];
+
   return (
     <ul
       role="list"

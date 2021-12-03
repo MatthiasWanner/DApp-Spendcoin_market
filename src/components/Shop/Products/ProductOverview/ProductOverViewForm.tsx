@@ -11,7 +11,7 @@ type ProductOverViewFormProps = {
 function ProductOverViewForm({
   product
 }: ProductOverViewFormProps): JSX.Element {
-  const [price, setPrice] = useState<string>('');
+  const [price, setPrice] = useState<string>(product.basePrice);
   const { dispatchActiveModal, dispatchResetViewedProduct } = useAppFromStore();
   const { dispatchAddItem } = useCartFromStore();
 
@@ -21,15 +21,15 @@ function ProductOverViewForm({
     };
   }, []);
 
-  const handleBuyProduct = ({ name, VAT: amount }: Product, price: string) => {
+  const handleBuyProduct = (product: Product, price: string) => {
     dispatchAddItem({
+      ...product,
       currency: 'EUR',
-      name,
       quantity: 1,
-      unitPrice: (+price.replace(',', '.') * 100).toString(),
+      unitPrice: (+price.replace(',', '.')).toString(),
       tax: {
         type: 'percentage',
-        amount
+        amount: product.VAT
       }
     });
     dispatchActiveModal(false);
