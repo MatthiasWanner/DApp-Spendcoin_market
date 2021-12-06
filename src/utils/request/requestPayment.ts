@@ -23,6 +23,11 @@ export const anyToErc20Payment = async (
   const {
     request: { request }
   } = requestData;
+
+  if (!request) {
+    throw new Error('No request data provided');
+  }
+
   const paymentCurrency = getPaymentCurrencyContract(request);
   const paymentCurrencySymbol = requestData.paymentCurrency;
 
@@ -94,7 +99,7 @@ export const requestPayment = async (
   ethereum: providers.ExternalProvider
 ): Promise<void> => {
   try {
-    if (!walletAddress || !requestData.request) {
+    if (!walletAddress || !requestData.request.request) {
       throw new Error('No account or request data provided');
     }
 

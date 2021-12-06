@@ -9,6 +9,6 @@ export interface IInvoiceGetOneResponse extends IInvoiceCreateResponse {}
 export interface IInvoiceGetOneResponseWithRequest
   extends IInvoiceGetOneResponse {
   request: {
-    request: IRequestData;
+    request?: IRequestData;
   };
 }
