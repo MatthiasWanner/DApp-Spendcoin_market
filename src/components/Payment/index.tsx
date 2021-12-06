@@ -7,6 +7,7 @@ import { Button } from '@components/FormComponents';
 import { useQuery } from 'react-query';
 import { invoices } from '@utils/api';
 import { requestPayment } from '@utils/request';
+import { toast } from 'react-toastify';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
@@ -31,7 +32,15 @@ export default function Payment() {
             {data && (
               <Button
                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-sapphire hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900"
-                handleClick={() => requestPayment(account, data, ethereum)}
+                handleClick={async () => {
+                  try {
+                    await requestPayment(account, data, ethereum);
+                    toast.success('Payment effectué !');
+                  } catch (e) {
+                    const { message } = e as Error;
+                    toast.error(message);
+                  }
+                }}
               >
                 Payer avec Metamask
               </Button>

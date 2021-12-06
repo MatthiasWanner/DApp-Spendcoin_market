@@ -12,9 +12,8 @@ import {
   getPaymentCurrencyContract,
   getPaymentNetwork
 } from '.';
-import axios, { AxiosResponse } from 'axios';
-import { requestApi } from '@utils/api';
-import { IGetOneCurrencyInfos } from '@interfaces/request/currencies-infos.interface';
+import { currencies } from '@utils/api';
+import { cryptoCompare } from '@utils/api/crypto_compare';
 
 export const anyToErc20Payment = async (
   walletAddress: string,
@@ -57,18 +56,11 @@ export const anyToErc20Payment = async (
       exchangeInfo: {
         cryptocompare: { code: referenceCurrencySymbol }
       }
-    } = (
-      await requestApi.get<any, AxiosResponse<IGetOneCurrencyInfos>>(
-        `/currency/${paymentCurrencySymbol}`
-      )
-    ).data;
+    } = await currencies.getOne(paymentCurrencySymbol);
 
-    // TODO : Dynamic type response axios.data = {[key: CONVERSION_CURRENCY]: number}
     const rate = (
-      await axios.get(
-        `https://min-api.cryptocompare.com/data/price?fsym=${request.currencyInfo.value}&tsyms=${referenceCurrencySymbol}` // 👈 will accept more payment currencies later
-      )
-    ).data[referenceCurrencySymbol];
+      await cryptoCompare.getRate(request.currency, referenceCurrencySymbol)
+    )[referenceCurrencySymbol];
 
     const maxToSpend = calculateMaxToSpend(
       +request.expectedAmount,
@@ -92,7 +84,7 @@ export const anyToErc20Payment = async (
     });
     await tx.wait(1);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -122,6 +114,6 @@ export const requestPayment = async (
 
     throw new Error('Payment network not supported');
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

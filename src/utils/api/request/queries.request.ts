@@ -7,6 +7,10 @@ import {
   IInvoiceUpdateArgs,
   IInvoiceGetOneResponseWithRequest
 } from '@interfaces/request';
+import {
+  IGetCurrenciesInfos,
+  IGetOneCurrencyInfos
+} from '@interfaces/request/currencies-infos.interface';
 import { requestApi } from '@utils/api/request';
 
 export const invoices = {
@@ -29,4 +33,12 @@ export const invoices = {
 
   getAll: async (): Promise<IInvoiceGetAllResponse[]> =>
     (await requestApi.get('/invoices')).data
+};
+
+export const currencies = {
+  getAll: async (): Promise<IGetCurrenciesInfos[]> =>
+    (await requestApi.get('/currency')).data,
+
+  getOne: async (currencyId: string): Promise<IGetOneCurrencyInfos> =>
+    (await requestApi.get(`/currency/${currencyId}`)).data
 };
