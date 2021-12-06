@@ -45,6 +45,7 @@ export interface IInvoiceBody {
     format: string;
     version: string;
   };
+  draft?: boolean;
   creationDate: string;
   invoiceItems: InvoiceItem[];
   invoiceNumber: string;
