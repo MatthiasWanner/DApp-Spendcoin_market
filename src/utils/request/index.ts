@@ -1,6 +1,5 @@
-import { getPaymentNetwork } from './getPaymentNetwork';
-import { getPaymentCurrencyContract } from './getPaymentCurrency';
-import { requestPayment } from './requestPayment';
+export * from './getPaymentNetwork';
+export * from './getPaymentCurrency';
+export * from './requestPayment';
 export * from './convertValue';
-
-export { getPaymentNetwork, getPaymentCurrencyContract, requestPayment };
+export * from './calculateMaxToSpend';
