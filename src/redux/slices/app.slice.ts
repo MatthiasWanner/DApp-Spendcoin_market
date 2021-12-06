@@ -8,6 +8,7 @@ export interface AppState {
   viewedProduct: Product;
   invoiceId: string | null;
   requestId: string | null;
+  isAwaitingRequest: boolean;
 }
 
 const initialState: AppState = {
@@ -24,7 +25,8 @@ const initialState: AppState = {
     options: []
   },
   invoiceId: null,
-  requestId: null
+  requestId: null,
+  isAwaitingRequest: true
 };
 
 export const appSlice = createSlice({
@@ -45,6 +47,9 @@ export const appSlice = createSlice({
     },
     setRequestId: (state, action: PayloadAction<string | null>) => {
       return { ...state, requestId: action.payload };
+    },
+    setIsAwaitingRequest: (state, action: PayloadAction<boolean>) => {
+      return { ...state, isAwaitingRequest: action.payload };
     }
   }
 });
@@ -54,28 +59,39 @@ export const {
   setViewedProduct,
   resetViewedProduct,
   setInvoiceId,
-  setRequestId
+  setRequestId,
+  setIsAwaitingRequest
 } = appSlice.actions;
 
 export const useAppFromStore = () => {
   const app = useSelector((state: RootState) => state.app);
+
   const dispatch = useDispatch();
+
   const dispatchActiveModal = (payload: boolean) =>
     dispatch(setActiveModal(payload));
+
   const dispatchViewedProduct = (payload: Product) =>
     dispatch(setViewedProduct(payload));
+
   const dispatchResetViewedProduct = () => dispatch(resetViewedProduct());
+
   const dispatchInvoiceId = (payload: string | null) =>
     dispatch(setInvoiceId(payload));
+
   const dispatchRequestId = (payload: string | null) =>
     dispatch(setRequestId(payload));
+
+  const dispatchIsAwaitingRequest = (payload: boolean) =>
+    dispatch(setIsAwaitingRequest(payload));
   return {
     app,
     dispatchActiveModal,
     dispatchViewedProduct,
     dispatchResetViewedProduct,
     dispatchInvoiceId,
-    dispatchRequestId
+    dispatchRequestId,
+    dispatchIsAwaitingRequest
   };
 };
 
