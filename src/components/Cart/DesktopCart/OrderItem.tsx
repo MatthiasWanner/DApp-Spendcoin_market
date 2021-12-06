@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { TrashIcon } from '@heroicons/react/outline';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 import { CartItem } from '@interfaces/CartItem';
 
 interface IProps {

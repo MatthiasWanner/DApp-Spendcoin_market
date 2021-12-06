@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PaymentButtons from './PaymentButtons';
 import Cart from '@components/Cart';
 import OrderForm from '@components/Order/OrderForm/OrderForm';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
 
 function OrderRegister(): JSX.Element {
   const { invoiceId } = useAppFromStore().app;

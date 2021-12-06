@@ -14,8 +14,8 @@ import { invoices } from '@utils/api';
 import { invoiceBody } from '@utils/constants';
 import { invoiceNumberGenerator } from '@utils/api/request/invoiceNumberGenerator';
 import { toast } from 'react-toastify';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 
 interface IFormData extends IAddress {
   lastName: string;
