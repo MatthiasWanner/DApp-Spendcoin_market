@@ -1,8 +1,8 @@
 import { Button } from '@components/FormComponents';
 import { Product } from '@interfaces/Product';
 import React, { useEffect, useState } from 'react';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 
 type ProductOverViewFormProps = {
   product: Product;

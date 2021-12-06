@@ -4,7 +4,7 @@ import { Disclosure } from '@headlessui/react';
 import { fetchGiftCardsData } from '@utils/api';
 import MobileTotal from './MobileInvoiceDetails/MobileTotal';
 import MobileOrderItem from './MobileOrderItem';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 import { CartItem } from '@interfaces/CartItem';
 
 const total = '20€'; // 👈 will come from Redux store

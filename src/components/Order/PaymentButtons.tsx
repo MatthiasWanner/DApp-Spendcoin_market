@@ -5,8 +5,7 @@ import { useMutation } from 'react-query';
 import { invoices } from '@utils/api';
 import { Button } from '@components/FormComponents';
 import { toast } from 'react-toastify';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
 import { useRouter } from 'next/dist/client/router';
 
 const total = '20€'; // 👈 Will come from redux

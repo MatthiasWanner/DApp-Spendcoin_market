@@ -5,8 +5,7 @@ import { QueryClientProvider } from 'react-query';
 import { queryClient } from '@utils/api';
 import { Provider as ReduxProvider } from 'react-redux';
 import { MetaMaskProvider } from 'metamask-react';
-// TODO: fix index import
-import { store } from '../src/redux/index';
+import { store } from '@redux/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
