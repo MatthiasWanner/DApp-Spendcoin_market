@@ -8,7 +8,6 @@ import { useQuery } from 'react-query';
 import { invoices } from '@utils/api';
 import { requestPayment } from '@utils/request';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
