@@ -2,14 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAppFromStore } from '../../redux/slices/app.slice';
-import { Button } from '@components/FormComponents';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Shop', href: '/shop' },
-  { name: 'Order', href: '/order' }, // 👈 only dev link
-  { name: 'Payment', href: '/payment' } // 👈 only dev link
+  { name: 'Shop', href: '/shop' }
 ];
 
 export default function Header(): JSX.Element {
