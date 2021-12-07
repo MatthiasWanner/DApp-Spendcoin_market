@@ -2,26 +2,20 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAppFromStore } from '../../redux/slices/app.slice';
-import { Button } from '@components/FormComponents';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Shop', href: '/shop' },
-  { name: 'Order', href: '/order' }, // 👈 only dev link
-  { name: 'Payment', href: '/payment' } // 👈 only dev link
+  { name: 'Shop', href: '/shop' }
 ];
 
 export default function Header(): JSX.Element {
   return (
     <>
       <Head>
-        <div>
-          <title>SpendCoin Market</title>
-          <meta name="description" content="Buy gift cards with cryptos" />
-          <link rel="icon" href="/img/favicon.ico" />
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        </div>
+        <title>SpendCoin Market</title>
+        <meta name="description" content="Buy gift cards with cryptos" />
+        <link rel="icon" href="/img/favicon.ico" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <header>
         <nav aria-label="Top">

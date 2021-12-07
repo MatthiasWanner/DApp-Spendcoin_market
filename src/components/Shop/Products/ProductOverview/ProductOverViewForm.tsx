@@ -1,8 +1,8 @@
 import { Button } from '@components/FormComponents';
 import { Product } from '@interfaces/Product';
 import React, { useEffect, useState } from 'react';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 
 type ProductOverViewFormProps = {
   product: Product;
@@ -65,7 +65,7 @@ function ProductOverViewForm({
               className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
               handleClick={() => handleBuyProduct(product, price)}
             >
-              Acheter
+              {'Ajouter au panier'}
             </Button>
           </div>
         </form>

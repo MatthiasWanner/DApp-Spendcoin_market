@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Product } from '@interfaces/Product';
-import { useAppFromStore } from 'src/redux/slices/app.slice';
+import { useAppFromStore } from '@redux/slices/app.slice';
 
 type ProductButtonProps = {
   id: number;

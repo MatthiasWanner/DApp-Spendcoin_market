@@ -1,6 +1,6 @@
 import { CartItem } from '@interfaces/CartItem';
 import React from 'react';
-import { useCartFromStore } from 'src/redux/slices/cart.slice';
+import { useCartFromStore } from '@redux/slices/cart.slice';
 
 import OrderItem from './OrderItem';
 
