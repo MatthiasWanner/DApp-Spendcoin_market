@@ -4,7 +4,7 @@ export const gifCards = [
     href: '#',
     basePrice: '20',
     currencySymbol: '€',
-    VAT: '20',
+    VAT: '0',
     description:
       'Offrez une carte cadeau, ils pourront se faire plaisir sur Cdiscount ! Disponible en 20, 50 et 100€.',
     images: [
@@ -14,7 +14,7 @@ export const gifCards = [
       }
     ],
     breadcrumbs: [
-      { id: 1, name: 'CarteS Cadeau', href: '#' },
+      { id: 1, name: 'Carte Cadeau', href: '#' },
       { id: 2, name: 'Cdiscount', href: '#' }
     ],
     options: [
@@ -24,11 +24,11 @@ export const gifCards = [
     ]
   },
   {
-    name: 'Carte cadeau Cdiscount',
+    name: 'Carte cadeau AiBnB',
     href: '#',
-    price: '20',
+    basePrice: '20',
     currencySymbol: '€',
-    VAT: '20',
+    VAT: '0',
     description:
       'Offrez une carte cadeau, ils pourront se faire plaisir sur AirBnB ! Disponible en 20, 50 et 100€.',
     images: [
@@ -38,7 +38,7 @@ export const gifCards = [
       }
     ],
     breadcrumbs: [
-      { id: 1, name: 'CarteS', href: '#' },
+      { id: 1, name: 'Cartes Cadeau', href: '#' },
       { id: 2, name: 'AirBnB', href: '#' }
     ],
     options: [

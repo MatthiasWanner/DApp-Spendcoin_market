@@ -1,12 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+import OrderRegister from '@components/Order';
 
 export default function index() {
-  return (
-    <div>
-      <Link href="/payment">
-        <a>Enregistrer une commande</a>
-      </Link>
-    </div>
-  );
+  return <OrderRegister />;
 }
