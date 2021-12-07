@@ -16,7 +16,6 @@ export const invoiceBody = {
     lastName: 'Lefort',
     taxRegistration: 'FR77898900121'
   },
-  paymentCurrency:
-    process.env.NODE_ENV === 'production' ? 'USDC-matic' : 'FAU-rinkeby',
+  paymentCurrency: process.env.NEXT_PUBLIC_PAYMENT_CURRENCY || 'FAU-rinkeby',
   paymentAddress: process.env.NEXT_PUBLIC_PAYMENT_ADDRESS
 };
