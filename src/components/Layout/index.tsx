@@ -17,8 +17,8 @@ export default function Layout({ children }: IProps): JSX.Element {
         <div className="min-h-screen">
           <Header />
           <Body> {children} </Body>
+          <Footer />
         </div>
-        <Footer />
       </div>
       <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
