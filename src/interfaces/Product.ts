@@ -7,7 +7,7 @@ export interface Product {
   VAT: string;
   description: string;
   images: ProductImage[];
-  breadcrumbs: ProductBreadcrumbs[];
+  breadcrumbs: IProductBreadcrumbs[];
   options: ProductOption[];
 }
 
@@ -21,7 +21,7 @@ export interface ProductOption {
   value: string;
 }
 
-export interface ProductBreadcrumbs {
+export interface IProductBreadcrumbs {
   id: number;
   name: string;
   href: string;

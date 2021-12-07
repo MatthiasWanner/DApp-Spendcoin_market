@@ -24,7 +24,7 @@ function OrderItem({ product }: IProps): JSX.Element {
           <h3 className="text-gray-900">{product.name}</h3>
           <p className="text-gray-900">
             {product.unitPrice}
-            {product.currency}
+            {product.currencySymbol}
           </p>
           <p className="text-gray-900">Quantité: 1</p>
         </div>
