@@ -13,6 +13,9 @@ module.exports = {
         isabelline: '#f8f5f1',
         'space-cadet': '#1d1a44',
         'indigo-dye': '#1a4461'
+      },
+      boxShadow: {
+        'white-light': '5px 5px 10px 3px rgba(255, 255, 255, 0.3)'
       }
     }
   },
