@@ -1,8 +1,6 @@
-import { Button } from '@components/FormComponents';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
-import { toast } from 'react-toastify';
 
 const Home: NextPage = () => {
   return (
