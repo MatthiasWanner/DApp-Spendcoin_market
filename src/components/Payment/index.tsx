@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { invoices } from '@utils/api';
 import { requestPayment } from '@utils/request';
 import { toast } from 'react-toastify';
+import AwaitingRequest from './AwaitingRequest';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
@@ -29,7 +30,7 @@ export default function Payment() {
 
   if (!requestId) return <PaymentButtons />;
 
-  if (isAwaitingRequest) return <p>... awaiting request</p>; // TODO : Replace with loading component
+  if (isAwaitingRequest) return <AwaitingRequest />; // TODO : Replace with loading component
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
