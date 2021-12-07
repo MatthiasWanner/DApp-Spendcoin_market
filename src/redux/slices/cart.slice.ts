@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '..';
-
-import { InvoiceItem as CartItem } from '@interfaces/request';
+import { CartItem } from '@interfaces/CartItem';
 
 export interface CartState {
   products: CartItem[];

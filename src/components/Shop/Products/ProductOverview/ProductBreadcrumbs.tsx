@@ -1,8 +1,8 @@
-import { ProductBreadcrumbs } from '@interfaces/Product';
+import { IProductBreadcrumbs } from '@interfaces/Product';
 import React from 'react';
 
 type ProductBreadcrumbsProps = {
-  breadcrumbs: ProductBreadcrumbs[];
+  breadcrumbs: IProductBreadcrumbs[];
 };
 
 function ProductBreadcrumbs({

@@ -1,12 +1,16 @@
 import {
   IInvoiceCreateResponse,
-  IInvoiceGetOneResponse,
   IInvoiceGetAllResponse,
   IInvoiceBody,
   IConvertInvoiceOnChain,
   IInvoiceUpdateResponse,
-  IInvoiceUpdateArgs
+  IInvoiceUpdateArgs,
+  IInvoiceGetOneResponseWithRequest
 } from '@interfaces/request';
+import {
+  IGetCurrenciesInfos,
+  IGetOneCurrencyInfos
+} from '@interfaces/request/currencies-infos.interface';
 import { requestApi } from '@utils/api/request';
 
 export const invoices = {
@@ -22,9 +26,19 @@ export const invoices = {
   postOnChain: async (invoiceId: string): Promise<IConvertInvoiceOnChain> =>
     (await requestApi.post(`/invoices/${invoiceId}`)).data,
 
-  getOne: async (requestId: string): Promise<IInvoiceGetOneResponse> =>
+  getOne: async (
+    requestId: string
+  ): Promise<IInvoiceGetOneResponseWithRequest> =>
     (await requestApi.get(`/invoices/${requestId}?withRequest=true`)).data,
 
   getAll: async (): Promise<IInvoiceGetAllResponse[]> =>
     (await requestApi.get('/invoices')).data
+};
+
+export const currencies = {
+  getAll: async (): Promise<IGetCurrenciesInfos[]> =>
+    (await requestApi.get('/currency')).data,
+
+  getOne: async (currencyId: string): Promise<IGetOneCurrencyInfos> =>
+    (await requestApi.get(`/currency/${currencyId}`)).data
 };
