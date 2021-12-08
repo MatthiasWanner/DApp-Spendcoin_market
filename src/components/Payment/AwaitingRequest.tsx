@@ -1,4 +1,4 @@
-import Spinner from '@components/Spinner';
+import Spinner from '@components/SpinnerComponent';
 import { COLORS } from '@utils/constants/colors.constants';
 import PaymentContainer from './PaymentContainer';
 
