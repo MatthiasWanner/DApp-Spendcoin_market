@@ -8,11 +8,13 @@ import { useQuery } from 'react-query';
 import { invoices } from '@utils/api';
 import { requestPayment } from '@utils/request';
 import { toast } from 'react-toastify';
+import AwaitingRequest from './AwaitingRequest';
+import PaymentContainer from './PaymentContainer';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
-  const { requestId, isAwaitingRequest } = useAppFromStore().app;
-  const { dispatchIsAwaitingRequest } = useAppFromStore();
+  const { requestId, isAwaitingRequest, isPaying } = useAppFromStore().app;
+  const { dispatchIsAwaitingRequest, dispatchIsPaying } = useAppFromStore();
 
   const { data } = useQuery(
     `invoice:${requestId}`,
@@ -29,35 +31,40 @@ export default function Payment() {
 
   if (!requestId) return <PaymentButtons />;
 
-  if (isAwaitingRequest) return <p>... awaiting request</p>; // TODO : Replace with loading component
+  if (isAwaitingRequest)
+    return (
+      <AwaitingRequest message="Votre facture est en cours de contôle, cela peut prendre plusieurs minutes" />
+    );
+
+  if (isPaying) return <AwaitingRequest message="Paiement en cours" />;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col max-w-3xl mx-auto bg-isabelline h-72 shadow-white-light">
-        <div className=" flex h-full justify-center items-center">
-          <Metamask />
-        </div>
-        {account && (
-          <div className="flex h-full justify-center items-center">
-            {data && (
-              <Button
-                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-sapphire hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900"
-                handleClick={async () => {
-                  try {
-                    await requestPayment(account, data, ethereum);
-                    toast.success('Payment effectué !');
-                  } catch (e) {
-                    const { message } = e as Error;
-                    toast.error(message);
-                  }
-                }}
-              >
-                Payer avec Metamask
-              </Button>
-            )}
-          </div>
-        )}
+    <PaymentContainer>
+      <div className=" flex h-full justify-center items-center">
+        <Metamask />
       </div>
-    </div>
+      {account && (
+        <div className="flex h-full justify-center items-center">
+          {data && (
+            <Button
+              className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-sapphire hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900"
+              handleClick={async () => {
+                try {
+                  dispatchIsPaying(true);
+                  await requestPayment(account, data, ethereum);
+                  toast.success('Payment effectué !');
+                  dispatchIsPaying(false);
+                } catch (e) {
+                  const { message } = e as Error;
+                  toast.error(message);
+                }
+              }}
+            >
+              Payer avec Metamask
+            </Button>
+          )}
+        </div>
+      )}
+    </PaymentContainer>
   );
 }
