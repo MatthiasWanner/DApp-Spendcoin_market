@@ -9,6 +9,7 @@ export interface AppState {
   invoiceId: string | null;
   requestId: string | null;
   isAwaitingRequest: boolean;
+  isPaying: boolean;
 }
 
 const initialState: AppState = {
@@ -26,7 +27,8 @@ const initialState: AppState = {
   },
   invoiceId: null,
   requestId: null,
-  isAwaitingRequest: true
+  isAwaitingRequest: false,
+  isPaying: false
 };
 
 export const appSlice = createSlice({
@@ -50,6 +52,9 @@ export const appSlice = createSlice({
     },
     setIsAwaitingRequest: (state, action: PayloadAction<boolean>) => {
       return { ...state, isAwaitingRequest: action.payload };
+    },
+    setIsPaying: (state, action: PayloadAction<boolean>) => {
+      return { ...state, isPaying: action.payload };
     }
   }
 });
@@ -60,7 +65,8 @@ export const {
   resetViewedProduct,
   setInvoiceId,
   setRequestId,
-  setIsAwaitingRequest
+  setIsAwaitingRequest,
+  setIsPaying
 } = appSlice.actions;
 
 export const useAppFromStore = () => {
@@ -84,6 +90,8 @@ export const useAppFromStore = () => {
 
   const dispatchIsAwaitingRequest = (payload: boolean) =>
     dispatch(setIsAwaitingRequest(payload));
+
+  const dispatchIsPaying = (payload: boolean) => dispatch(setIsPaying(payload));
   return {
     app,
     dispatchActiveModal,
@@ -91,7 +99,8 @@ export const useAppFromStore = () => {
     dispatchResetViewedProduct,
     dispatchInvoiceId,
     dispatchRequestId,
-    dispatchIsAwaitingRequest
+    dispatchIsAwaitingRequest,
+    dispatchIsPaying
   };
 };
 

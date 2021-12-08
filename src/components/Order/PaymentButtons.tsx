@@ -12,12 +12,14 @@ import GoToShopButton from '@components/Shop/GoToShopButton';
 function PaymentButtons(): JSX.Element {
   const router = useRouter();
 
-  const { app, dispatchRequestId } = useAppFromStore();
+  const { app, dispatchRequestId, dispatchIsAwaitingRequest } =
+    useAppFromStore();
   const { total } = useCartFromStore().cart;
 
   const { mutateAsync } = useMutation(invoices.postOnChain, {
     onSuccess: ({ requestId }) => {
       dispatchRequestId(requestId);
+      dispatchIsAwaitingRequest(true);
       router.push('/payment');
     }
   });
