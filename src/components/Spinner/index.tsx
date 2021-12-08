@@ -2,34 +2,17 @@ import { COLORS } from '@utils/constants/colors.constants';
 import React from 'react';
 
 interface IProps {
-  fullScreen?: boolean;
-  transparent?: boolean;
-  fixed?: boolean;
   text?: string;
   spinnerColor?: COLORS;
 }
 
 export default function Spinner({
-  fullScreen,
-  transparent,
-  fixed,
   text,
   spinnerColor = COLORS.WHITE
 }: IProps): JSX.Element {
   return (
     //OPTION CIRCLE
-    <div
-      className={`
-      ${
-        fullScreen
-          ? 'h-screen w-screen backdrop-filter backdrop-blur-sm'
-          : ' h-full w-full'
-      }
-      ${transparent ? 'bg-opacity-70' : ''}
-      ${fixed ? 'fixed top-0 left-0 z-50' : ''}
-      grid place-items-center
-    `}
-    >
+    <div className="grid place-items-center h-full w-full">
       <div className="flex flex-col items-center space-y-10">
         <svg
           className="animate-spin w-20 text-center"
