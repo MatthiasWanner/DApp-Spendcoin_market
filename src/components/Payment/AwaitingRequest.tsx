@@ -2,13 +2,16 @@ import Spinner from '@components/Spinner';
 import { COLORS } from '@utils/constants/colors.constants';
 import PaymentContainer from './PaymentContainer';
 
-function AwaitingRequest() {
+interface IProps {
+  message?: string;
+}
+
+function AwaitingRequest({
+  message = 'Awaiting Blockchain'
+}: IProps): JSX.Element {
   return (
     <PaymentContainer>
-      <Spinner
-        text="Votre facture est en cours de contôle, cela peut prendre plusieurs minutes"
-        spinnerColor={COLORS.INDIGO_DYE}
-      />
+      <Spinner text={message} spinnerColor={COLORS.INDIGO_DYE} />
     </PaymentContainer>
   );
 }

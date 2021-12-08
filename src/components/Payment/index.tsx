@@ -13,8 +13,8 @@ import PaymentContainer from './PaymentContainer';
 
 export default function Payment() {
   const { account, ethereum } = useMetaMask();
-  const { requestId, isAwaitingRequest } = useAppFromStore().app;
-  const { dispatchIsAwaitingRequest } = useAppFromStore();
+  const { requestId, isAwaitingRequest, isPaying } = useAppFromStore().app;
+  const { dispatchIsAwaitingRequest, dispatchIsPaying } = useAppFromStore();
 
   const { data } = useQuery(
     `invoice:${requestId}`,
@@ -31,7 +31,12 @@ export default function Payment() {
 
   if (!requestId) return <PaymentButtons />;
 
-  if (isAwaitingRequest) return <AwaitingRequest />; // TODO : Replace with loading component
+  if (isAwaitingRequest)
+    return (
+      <AwaitingRequest message="Votre facture est en cours de contôle, cela peut prendre plusieurs minutes" />
+    );
+
+  if (isPaying) return <AwaitingRequest message="Paiement en cours" />;
 
   return (
     <PaymentContainer>
@@ -45,8 +50,10 @@ export default function Payment() {
               className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-sapphire hover:bg-indigo-dye focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900"
               handleClick={async () => {
                 try {
+                  dispatchIsPaying(true);
                   await requestPayment(account, data, ethereum);
                   toast.success('Payment effectué !');
+                  dispatchIsPaying(false);
                 } catch (e) {
                   const { message } = e as Error;
                   toast.error(message);
